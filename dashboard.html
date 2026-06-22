@@ -137,7 +137,7 @@
       <div class="logo-mark">GTE</div>
       <div class="logo-text">
         <h1>Deal Evaluation Dashboard</h1>
-        <p>Growth Through Entrepreneurship &nbsp;&middot;&nbsp; Internal Use Only</p>
+        <p>Generational Transfer Entrepreneurs &nbsp;&middot;&nbsp; Internal Use Only</p>
       </div>
     </div>
     <div class="header-actions">
@@ -506,6 +506,8 @@ function openDrilldown(d) {
     var isInfo = INFO_ONLY.indexOf(t) >= 0;
     var pts = (!isInfo && g && {A:4,B:3,C:2,D:1,F:0}[g] !== undefined) ? {A:4,B:3,C:2,D:1,F:0}[g] : null;
     var pillStyle = g && bc[g] ? 'background:' + bc[g] + ';color:' + tc[g] + ';border:1px solid ' + {A:'#82C99A',B:'#76C8D4',C:'#F0C060',D:'#F0A060',F:'#F09090'}[g] : 'background:#EEF0F5;color:#5A6A84;';
+    var gradeDesc = (GRADE_DESCRIPTIONS[t] && g) ? GRADE_DESCRIPTIONS[t][g] : '';
+    var hasBody = notes || gradeDesc;
     body += '<div class="drilldown-test">'
       + '<div class="drilldown-test-header">'
       + '<div class="drilldown-test-num">' + t + '</div>'
@@ -513,7 +515,10 @@ function openDrilldown(d) {
       + '<span style="padding:3px 10px;border-radius:99px;font-size:11px;font-weight:800;' + pillStyle + '">' + (g || '—') + '</span>'
       + (pts !== null ? '<span style="font-size:11px;color:var(--text-muted);margin-left:6px;">' + pts + 'pt</span>' : '')
       + '</div>'
-      + (notes ? '<div class="drilldown-test-body"><div class="drilldown-notes">' + notes.replace(/\n/g,'<br>') + '</div></div>' : '')
+      + (hasBody ? '<div class="drilldown-test-body">'
+        + (gradeDesc ? '<div style="font-size:12px;font-weight:600;color:var(--navy);padding:5px 8px;border-radius:5px;background:' + (bc[g]||'#EEF0F5') + '22;margin-bottom:' + (notes ? '8px' : '0') + ';">' + gradeDesc + '</div>' : '')
+        + (notes ? '<div class="drilldown-notes">' + notes.replace(/\n/g,'<br>') + '</div>' : '')
+        + '</div>' : '')
       + '</div>';
   }
 
